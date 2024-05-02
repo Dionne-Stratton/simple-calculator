@@ -1,0 +1,121 @@
+//give me a basic html file containing the following: // 1. html with a
+calculator, with a display, numbers, basic operations, and an equals button and
+a clear button and a decimal button and a backspace button // 2. css tag with a
+basic style for the calculator // 3. js tag with a basic calculator
+functionality
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      .container {
+        width: 300px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .display {
+        width: 100%;
+        height: 60px;
+        font-size: 24px;
+        text-align: right;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      button {
+        width: 20%;
+        padding: 10px;
+        margin: 1%;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #f4f4f4;
+      }
+      button:hover {
+        background-color: #e4e4e4;
+      }
+      button:active {
+        background-color: #d4d4d4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="display">0</div>
+      <div class="buttons">
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>/</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>*</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>-</button>
+        <button>0</button>
+        <button>.</button>
+        <button>=</button>
+        <button>+</button>
+        <button>C</button>
+        <button>←</button>
+      </div>
+    </div>
+    <script>
+      const display = document.querySelector(".display");
+      const buttons = document.querySelectorAll(".buttons button");
+      let displayValue = "0";
+      let result = null;
+      let operators = ["+", "-", "*", "/"];
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (button.textContent === "C") {
+            displayValue = "0";
+            result = null;
+          } else if (button.textContent === "←") {
+            displayValue = displayValue.slice(0, -1);
+            if (displayValue === "") {
+              displayValue = "0";
+            }
+          } else if (button.textContent === ".") {
+            if (!decimal) {
+              displayValue += ".";
+            }
+          } else if (operators.includes(button.textContent)) {
+            //if the last character is an operator, replace it with the new operator
+            if (operators.includes(displayValue[displayValue.length - 1])) {
+              displayValue = displayValue.slice(0, -1) + button.textContent;
+            } else displayValue += button.textContent;
+            // decimal = false;
+          } else if (button.textContent === "=") {
+            result = eval(displayValue);
+            displayValue = result.toString();
+            decimal = false;
+          } else {
+            if (displayValue === "0") {
+              displayValue = button.textContent;
+            } else {
+              displayValue += button.textContent;
+            }
+          }
+          display.textContent = displayValue;
+        });
+      });
+    </script>
+  </body>
+</html>

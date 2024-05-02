@@ -1,0 +1,151 @@
+//give me a basic html file containing the following: // 1. html with a
+calculator, with a display, numbers, basic operations, and an equals button and
+a clear button and a decimal button and a backspace button // 2. css tag with a
+basic style for the calculator // 3. js tag with a basic calculator
+functionality
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      .container {
+        width: 300px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: aqua;
+      }
+      .display {
+        width: 95%;
+        margin: 0 auto;
+        font-size: 2rem;
+        text-align: right;
+        padding: 5px;
+        margin-bottom: 10px;
+        /* add inset shaddow */
+        box-shadow: inset 0 0 10px #484848;
+      }
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 5px;
+      }
+      button {
+        padding: 10%;
+        font-size: 2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        /* background-color: #f4f4f4; */
+        /* make background color semi transparent */
+        background-color: rgba(244, 244, 244, 0.5);
+        /* add shadow */
+        box-shadow: 0 0 5px #484848;
+      }
+      button:hover {
+        /* make background color semi transparent */
+        background-color: rgba(0, 0, 0, 0.5);
+        /* add shadow */
+        box-shadow: 0 0 5px #484848;
+      }
+      button:active {
+        background-color: #d4d4d4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="display">0</div>
+      <div class="buttons">
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>/</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>*</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>-</button>
+        <button>0</button>
+        <button>.</button>
+        <button>=</button>
+        <button>+</button>
+        <button>C</button>
+        <button>←</button>
+      </div>
+    </div>
+    <script>
+      const display = document.querySelector(".display");
+      const buttons = document.querySelectorAll(".buttons button");
+      let displayValue = "0";
+      let result = null;
+      let operators = ["+", "-", "*", "/"];
+      let containsDecimal = [];
+      let containsOperator = [];
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (button.textContent === "C") {
+            displayValue = "0";
+            result = null;
+            containsDecimal = [];
+          } else if (button.textContent === "←") {
+            if (displayValue[displayValue.length - 1] === ".") {
+              containsDecimal.pop();
+            }
+            if (operators.includes(displayValue[displayValue.length - 1])) {
+              containsOperator.pop();
+            }
+            ///if the last character is an operator, set
+            displayValue = displayValue.slice(0, -1);
+            if (displayValue === "") {
+              displayValue = "0";
+            }
+            //if the last character is a decimal, set decimal to false
+          } else if (button.textContent === ".") {
+            if (containsDecimal.length <= containsOperator.length) {
+              displayValue += ".";
+              containsDecimal.push(true);
+            }
+          } else if (operators.includes(button.textContent)) {
+            //if the last character is an operator, replace it with the new operator
+            if (operators.includes(displayValue[displayValue.length - 1])) {
+              displayValue = displayValue.slice(0, -1) + button.textContent;
+            } else displayValue += button.textContent;
+            containsOperator.push(true);
+          } else if (button.textContent === "=") {
+            if (
+              //   displayValue[displayValue.length - 1] !== "." &&
+              //   displayValue[displayValue.length - 1] !== "+" &&
+              //   displayValue[displayValue.length - 1] !== "-" &&
+              //   displayValue[displayValue.length - 1] !== "*" &&
+              //   displayValue[displayValue.length - 1] !== "/"
+              !operators.includes(displayValue[displayValue.length - 1]) &&
+              displayValue[displayValue.length - 1] !== "."
+            ) {
+              result = eval(displayValue);
+              displayValue = result.toString();
+            }
+          } else {
+            if (displayValue === "0") {
+              displayValue = button.textContent;
+            } else {
+              displayValue += button.textContent;
+            }
+          }
+          display.textContent = displayValue;
+        });
+      });
+    </script>
+  </body>
+</html>
