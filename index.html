@@ -1,9 +1,3 @@
-//give me a basic html file containing the following: // 1. html with a
-calculator, with a display, numbers, basic operations, and an equals button and
-a clear button and a decimal button and a backspace button // 2. css tag with a
-basic style for the calculator // 3. js tag with a basic calculator
-functionality
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,6 +6,8 @@ functionality
       body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
+        text-align: center;
+        margin: 3%;
       }
       .container {
         width: 300px;
@@ -21,6 +17,7 @@ functionality
         padding: 10px;
         border-radius: 5px;
         background-color: aqua;
+        margin-top: 5%;
       }
       .display {
         width: 95%;
@@ -30,7 +27,8 @@ functionality
         padding: 5px;
         margin-bottom: 10px;
         /* add inset shaddow */
-        box-shadow: inset 0 0 10px #484848;
+        box-shadow: inset 0 0 5px #484848;
+        background-color: rgba(244, 244, 244, 0.5);
       }
       .buttons {
         display: grid;
@@ -48,19 +46,18 @@ functionality
         background-color: rgba(244, 244, 244, 0.5);
         /* add shadow */
         box-shadow: 0 0 5px #484848;
+        /* box-shadow: inset 0 0 10px #484848; */
       }
       button:hover {
-        /* make background color semi transparent */
-        background-color: rgba(0, 0, 0, 0.5);
-        /* add shadow */
-        box-shadow: 0 0 5px #484848;
+        background-color: rgba(151, 151, 151, 0.3);
       }
       button:active {
-        background-color: #d4d4d4;
+        box-shadow: inset 0 0 5px #384b5a;
       }
     </style>
   </head>
   <body>
+    <h1>Calculator</h1>
     <div class="container">
       <div class="display">0</div>
       <div class="buttons">
