@@ -17,10 +17,10 @@
         padding: 10px;
         border-radius: 5px;
         /* add background image from local file in this folder */
-        background-image: url("image.png");
+        background-image: url("image1.png");
         /* set background image size */
         background-size: cover;
-        margin-top: 5%;
+        margin-top: 3%;
       }
       .display {
         width: 95%;
@@ -52,6 +52,9 @@
       button:active {
         box-shadow: inset 0 0 5px #384b5a;
       }
+      .selector {
+        margin-top: 3%;
+      }
     </style>
   </head>
   <body>
@@ -79,6 +82,14 @@
         <button>←</button>
       </div>
     </div>
+    <div class="selector">
+      <label for="image">Select Background Image:</label>
+      <select id="image">
+        <option value="image1.png">Butterflies</option>
+        <option value="image2.png">Koala</option>
+        <option value="image3.jpg">Sheep</option>
+      </select>
+    </div>
     <script>
       const display = document.querySelector(".display");
       const buttons = document.querySelectorAll(".buttons button");
@@ -87,6 +98,12 @@
       let operators = ["+", "-", "*", "/"];
       let containsDecimal = [];
       let containsOperator = [];
+      const select = document.getElementById("image");
+      select.addEventListener("change", () => {
+        document.querySelector(
+          ".container"
+        ).style.backgroundImage = `url(${select.value})`;
+      });
 
       buttons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -117,15 +134,7 @@
             } else displayValue += button.textContent;
             containsOperator.push(true);
           } else if (button.textContent === "=") {
-            if (
-              //   displayValue[displayValue.length - 1] !== "." &&
-              //   displayValue[displayValue.length - 1] !== "+" &&
-              //   displayValue[displayValue.length - 1] !== "-" &&
-              //   displayValue[displayValue.length - 1] !== "*" &&
-              //   displayValue[displayValue.length - 1] !== "/"
-              !operators.includes(displayValue[displayValue.length - 1]) &&
-              displayValue[displayValue.length - 1] !== "."
-            ) {
+            if (!isNaN(displayValue[displayValue.length - 1])) {
               result = eval(displayValue);
               displayValue = result.toString();
             }
