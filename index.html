@@ -72,10 +72,10 @@
       some scaffolded out code, and a schedule for our events.
     </p>
     <h1>Calculator</h1>
-    <div class="color-selector">
+    <!-- <div class="color-selector">
       <p>Color:</p>
       <input type="color" id="color" value="#33cccc" />
-    </div>
+    </div> -->
     <div class="container">
       <div class="display">0</div>
       <div class="buttons">
@@ -107,12 +107,12 @@
       let operators = ["+", "-", "*", "/"];
       let containsDecimal = [];
       let containsOperator = [];
-      const color = document.getElementById("color");
+      // const color = document.getElementById("color");
 
-      color.addEventListener("input", () => {
-        document.querySelector(".container").style.backgroundColor =
-          color.value;
-      });
+      // color.addEventListener("input", () => {
+      //   document.querySelector(".container").style.backgroundColor =
+      //     color.value;
+      // });
 
       buttons.forEach((button) => {
         button.addEventListener("click", () => {
