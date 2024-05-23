@@ -1,0 +1,133 @@
+<!-- create simple page with basic styling and instructions for the user to follow on scaffolding out a new project -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Instructions</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      p {
+        margin-bottom: 20px;
+      }
+      ul {
+        margin-bottom: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+      }
+      a:hover {
+        color: #f00;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Instructions and Schedule</h1>
+      <h2>Schedule</h2>
+      <p>
+        Follow this schedule to complete the project by the deadline. Make sure
+        to allocate enough time for each task and stick to the schedule. Though
+        you are expected to do your own work prior to attending Building Blocks,
+        we will have it as a live event each day to walk you through the tasks
+        and answer any questions you may have. Make sure to attend the live
+        events to get the most out of the project. The schedule is as follows:
+      </p>
+      <ul>
+        <li>Day 1: Scaffolding Out a New Project</li>
+        <li>Day 2: Adding Styles and Layout</li>
+        <li>Day 3: Adding Interactivity and Functionality</li>
+        <li>Day 4: Sharing the Project - Talking about Your Code</li>
+      </ul>
+      <h2>Scaffolding Out a New Project</h2>
+      <p>
+        Follow these instructions to scaffold out a simple project in an html
+        file with an empty style tag and script tag.
+      </p>
+      <ul>
+        <li>Create a new html file and name it index.html</li>
+        <li>Open the file in VS Code</li>
+        <li>Copy the code below and paste it into your index.html file</li>
+        <li>Save the file</li>
+        <li>Open the file in your browser using live server</li>
+      </ul>
+      <h2>Code</h2>
+      <pre>
+            <code>
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;title&gt;New Project&lt;/title&gt;
+                    &lt;style&gt;
+                        /* Add your styles here */
+                    &lt;/style&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    &lt;script&gt;
+                        // Add your scripts here
+                    &lt;/script&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </code>
+        </pre>
+      <p>
+        That's it! You now have a simple html file with an empty style tag and
+        script tag. You can now start adding your own styles and scripts to
+        build out your project.
+      </p>
+      <p>
+        For more information on scaffolding out a new project, visit the
+        <a href="https://www.w3schools.com/html/html_basic.asp" target="_blank"
+          >W3Schools HTML Tutorial</a
+        >.
+      </p>
+      <h2>Adding Functionality</h2>
+      <p>
+        To add functionality to your project, you can use JavaScript to create
+        interactive elements and dynamic content. You can add event listeners to
+        respond to user actions, manipulate the DOM to update the content. Below
+        is sample code of accessing the DOM and adding an event listener to a
+        button element. You will need to have a button element with the class
+        name "buttons" on it's parent element and an element (such as a div)
+        with the class name "display" in your HTML file.
+      </p>
+      <pre>
+            <code>
+                // Get the button element
+                const display = document.querySelector(".display");
+                const buttons = document.querySelectorAll(".buttons button");
+
+                // Add an event listener to the button
+                buttons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                        do your logic here
+                    });
+                });
+            </code>
+        </pre>
+    </div>
+  </body>
+</html>
