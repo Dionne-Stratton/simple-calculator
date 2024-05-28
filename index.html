@@ -132,7 +132,10 @@
               displayValue = "0";
             }
           } else if (button.textContent === ".") {
-            if (containsDecimal.length <= containsOperator.length) {
+            if (
+              containsDecimal.length <= containsOperator.length &&
+              displayValue[displayValue.length - 1] != "."
+            ) {
               displayValue += ".";
               containsDecimal.push(true);
             }
