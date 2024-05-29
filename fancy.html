@@ -96,8 +96,7 @@
       let displayValue = "0";
       let result = null;
       let operators = ["+", "-", "*", "/"];
-      let containsDecimal = [];
-      let containsOperator = [];
+      let usedOperators = [];
       const select = document.getElementById("image");
       select.addEventListener("change", () => {
         document.querySelector(
@@ -110,29 +109,30 @@
           if (button.textContent === "C") {
             displayValue = "0";
             result = null;
-            containsDecimal = [];
+            usedOperators = [];
           } else if (button.textContent === "←") {
             if (displayValue[displayValue.length - 1] === ".") {
-              containsDecimal.pop();
+              usedOperators.pop();
             }
             if (operators.includes(displayValue[displayValue.length - 1])) {
-              containsOperator.pop();
+              usedOperators.pop();
             }
             displayValue = displayValue.slice(0, -1);
             if (displayValue === "") {
               displayValue = "0";
             }
           } else if (button.textContent === ".") {
-            if (containsDecimal.length <= containsOperator.length) {
+            if (usedOperators[usedOperators.length - 1] !== ".") {
               displayValue += ".";
-              containsDecimal.push(true);
+              usedOperators.push(".");
             }
           } else if (operators.includes(button.textContent)) {
             //if the last character is an operator, replace it with the new operator
             if (operators.includes(displayValue[displayValue.length - 1])) {
               displayValue = displayValue.slice(0, -1) + button.textContent;
-            } else displayValue += button.textContent;
-            containsOperator.push(true);
+            } else if (displayValue[displayValue.length - 1] !== ".")
+              displayValue += button.textContent;
+            usedOperators.push(button.textContent);
           } else if (button.textContent === "=") {
             if (!isNaN(displayValue[displayValue.length - 1])) {
               result = eval(displayValue);

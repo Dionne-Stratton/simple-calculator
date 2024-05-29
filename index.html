@@ -23,7 +23,6 @@
         width: 300px;
         margin: 0 auto;
         border: 1px solid #ccc;
-        background-color: #fff;
         padding: 10px;
         border-radius: 5px;
         background-color: #33cccc;
@@ -107,6 +106,7 @@
       let operators = ["+", "-", "*", "/"];
       let containsDecimal = [];
       let containsOperator = [];
+      let usedOperators = [];
       // const color = document.getElementById("color");
 
       // color.addEventListener("input", () => {
@@ -114,48 +114,59 @@
       //     color.value;
       // });
 
+      //loop through the buttons and add event listener to each button so that when clicked, the button text content is displayed on the display
       buttons.forEach((button) => {
         button.addEventListener("click", () => {
-          if (button.textContent === "C") {
-            displayValue = "0";
-            result = null;
-            containsDecimal = [];
-          } else if (button.textContent === "←") {
-            if (displayValue[displayValue.length - 1] === ".") {
-              containsDecimal.pop();
-            }
-            if (operators.includes(displayValue[displayValue.length - 1])) {
-              containsOperator.pop();
-            }
-            displayValue = displayValue.slice(0, -1);
-            if (displayValue === "") {
+          switch (button.textContent) {
+            case "C":
               displayValue = "0";
-            }
-          } else if (button.textContent === ".") {
-            if (
-              containsDecimal.length <= containsOperator.length &&
-              displayValue[displayValue.length - 1] != "."
-            ) {
-              displayValue += ".";
-              containsDecimal.push(true);
-            }
-          } else if (operators.includes(button.textContent)) {
-            //if the last character is an operator, replace it with the new operator
-            if (operators.includes(displayValue[displayValue.length - 1])) {
-              displayValue = displayValue.slice(0, -1) + button.textContent;
-            } else displayValue += button.textContent;
-            containsOperator.push(true);
-          } else if (button.textContent === "=") {
-            if (!isNaN(displayValue[displayValue.length - 1])) {
-              result = eval(displayValue);
-              displayValue = result.toString();
-            }
-          } else {
-            if (displayValue === "0") {
-              displayValue = button.textContent;
-            } else {
-              displayValue += button.textContent;
-            }
+              result = null;
+              usedOperators = [];
+              break;
+            case "←":
+              if (displayValue[displayValue.length - 1] === ".") {
+                usedOperators.pop();
+              }
+              if (operators.includes(displayValue[displayValue.length - 1])) {
+                usedOperators.pop();
+              }
+              displayValue = displayValue.slice(0, -1);
+              if (displayValue === "") {
+                displayValue = "0";
+              }
+              break;
+            case ".":
+              if (usedOperators[usedOperators.length - 1] !== ".") {
+                displayValue += ".";
+                usedOperators.push(".");
+              }
+              break;
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+              if (operators.includes(displayValue[displayValue.length - 1])) {
+                displayValue = displayValue.slice(0, -1) + button.textContent;
+              } else if (displayValue[displayValue.length - 1] !== ".")
+                displayValue += button.textContent;
+              usedOperators.push(button.textContent);
+              break;
+            case "=":
+              if (
+                !operators.includes(displayValue[displayValue.length - 1]) &&
+                displayValue[displayValue.length - 1] !== "."
+              ) {
+                result = eval(displayValue);
+                displayValue = result.toString();
+              }
+              break;
+            default:
+              if (displayValue === "0") {
+                displayValue = button.textContent;
+              } else {
+                displayValue += button.textContent;
+              }
+              break;
           }
           display.textContent = displayValue;
         });
